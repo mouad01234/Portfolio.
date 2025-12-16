@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<style>* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #4c67ff, #6cc4ff);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background: #fff;
+  width: 450px;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  text-align: center;
+  animation: fadeIn .5s ease;
+}
+
+.title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.hidden { display: none; }
+
+.btn {
+  background: #4c67ff;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 20px;
+  transition: .3s;
+}
+
+.btn:hover {
+  background: #364bdb;
+}
+
+#question {
+  font-size: 22px;
+  margin: 20px 0;
+  font-weight: 600;
+  color: #333;
+}
+
+.answer {
+  background: #f1f1f1;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .2s;
+  color: #333;
+}
+
+.answer:hover {
+  background: #e1e1e1;
+}
+
+.correct {
+  background: #4caf50 !important;
+  color: white;
+}
+
+.wrong {
+  background: #ff5252 !important;
+  color: white;
+}
+
+.progress {
+  height: 8px;
+  background: #ddd;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+#progress-bar {
+  height: 8px;
+  width: 0%;
+  background: #4c67ff;
+  border-radius: 20px;
+  transition: .3s;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to   {opacity: 1; transform: translateY(0);}
+}
+</style>
+<div class="container">
+
+    <h1 class="title">Quiz Application</h1>
+
+    <div id="quiz-box" class="quiz-box hidden">
+        <div class="progress">
+            <div id="progress-bar"></div>
+        </div>
+
+        <div id="question"></div>
+
+        <div id="answers"></div>
+
+        <button id="next-btn" class="btn" disabled>Next</button>
+    </div>
+
+    <div id="start-box">
+        <h2>Ready to start?</h2>
+        <button id="start-btn" class="btn">Start Quiz</button>
+    </div>
+
+    <div id="result-box" class="hidden">
+        <h2>Your Score</h2>
+        <p id="score"></p>
+        <button class="btn" onclick="location.reload()">Restart</button>
+    </div>
+
+</div>
+
+<script>const startBtn = document.getElementById("start-btn");
+const quizBox = document.getElementById("quiz-box");
+const startBox = document.getElementById("start-box");
+const resultBox = document.getElementById("result-box");
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const nextBtn = document.getElementById("next-btn");
+const scoreEl = document.getElementById("score");
+const progressBar = document.getElementById("progress-bar");
+const questions = [
+    {
+        question: "What does HTML stand for?",
+        answers: ["Hyper Text Markup Language", "High Text Machine Language", "Hyper Tabular Markup Level"],
+        correct: 0
+    },
+    {
+        question: "Which language is used for styling web pages?",
+        answers: ["HTML", "CSS", "Python"],
+        correct: 1
+    },
+    {
+        question: "Which is a JavaScript framework?",
+        answers: ["Laravel", "React", "Photoshop"],
+        correct: 1
+    },
+    {
+        question: "What does PHP stand for?",
+        answers: ["Progressive Hyper Program", "Hypertext Preprocessor", "Program Host Page"],
+        correct: 1
+    }
+];
+
+let index = 0;
+let score = 0;
+let selected = false;
+
+startBtn.addEventListener("click", () => {
+    startBox.classList.add("hidden");
+    quizBox.classList.remove("hidden");
+    loadQuestion();
+});
+
+function loadQuestion() {
+    selected = false;
+    nextBtn.disabled = true;
+
+    const q = questions[index];
+    questionEl.textContent = q.question;
+
+    progressBar.style.width = ((index) / questions.length) * 100 + "%";
+
+    answersEl.innerHTML = "";
+    q.answers.forEach((ans, i) => {
+        const div = document.createElement("div");
+        div.textContent = ans;
+        div.className = "answer";
+        div.onclick = () => selectAnswer(div, i);
+        answersEl.appendChild(div);
+    });
+}
+
+function selectAnswer(div, i) {
+    if (selected) return;
+    selected = true;
+
+    const q = questions[index];
+
+    if (i === q.correct) {
+        div.classList.add("correct");
+        score++;
+    } else {
+        div.classList.add("wrong");
+    }
+
+    nextBtn.disabled = false;
+}
+
+nextBtn.addEventListener("click", () => {
+    index++;
+
+    if (index >= questions.length) {
+        finishQuiz();
+    } else {
+        loadQuestion();
+    }
+});
+
+function finishQuiz() {
+    quizBox.classList.add("hidden");
+    resultBox.classList.remove("hidden");
+
+    scoreEl.textContent = `${score} / ${questions.length}`;
+    progressBar.style.width = "100%";
+}
+</script>
+
+</body>
+</html>

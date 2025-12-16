@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #0d0f24;
+    color: white;
+    overflow-x: hidden;
+}
+
+
+.bg-animation {
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, #6f00ff55, #000);
+    filter: blur(120px);
+    z-index: -1;
+    animation: move 12s infinite linear alternate;
+}
+
+@keyframes move {
+    0% { transform: translate(-20%, -20%); }
+    100% { transform: translate(20%, 20%); }
+}
+
+
+.glass {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    padding: 40px;
+    margin: 40px auto;
+    width: 85%;
+    border-radius: 18px;
+    box-shadow: 0 0 25px #6f00ff55;
+}
+
+
+.hero {
+    text-align: center;
+    padding-top: 60px;
+}
+
+.profile {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #8a2bff;
+    box-shadow: 0 0 18px #9f4bff;
+}
+
+.title {
+    font-size: 40px;
+    margin-top: 20px;
+}
+
+.title span {
+    color: #ba68ff;
+}
+
+.subtitle {
+    margin-top: 15px;
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+.btn {
+    margin-top: 25px;
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, #7f00ff, #e100ff);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    box-shadow: 0 0 12px #b94dff;
+}
+
+
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 32px;
+    color: #d28dff;
+}
+
+
+.card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+
+.skills {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.skills span {
+    background: linear-gradient(45deg, #8a2bff, #c751ff);
+    padding: 10px 18px;
+    border-radius: 25px;
+    box-shadow: 0 0 10px #b94dff;
+}
+
+/* Container dyal projets */
+.projects {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; 
+    justify-content: center;
+}
+
+/* Card dyal projet b nafs l design li 3andek */
+.project-card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    width: 280px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+/* Hover petit effet */
+.project-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.08);
+}
+
+/* Image lfo9 */
+.project-card img {
+    width: 100%;
+    height: 280px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-bottom: 12px;
+}
+
+/* Titre */
+.project-card h3 {
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+/* Description */
+.project-card p {
+    color: #ddd;
+    font-size: 14px;
+}
+
+/* Link b nafs l color li 3andek */
+.project-card a {
+    display: inline-block;
+    margin-top: 12px;
+    color: #e398ff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.project-card a:hover {
+    text-decoration: underline;
+}
+
+
+/* CONTACT */
+#contact p {
+    text-align: center;
+    margin: 8px 0;
+}
+#img2{
+    width: 200px;
+     height: 300px;
+     margin: 6px;
+}
